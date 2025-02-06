@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@layer utilities {
+    .active-link {
+      @apply bg-white/20;
+    }
+  }

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background shape -->
+  <rect x="10" y="10" width="80" height="80" rx="15" ry="15" fill="#2c3e50"/>
+  
+  <!-- Justice scales -->
+  <path d="M25 50 L50 25 L75 50 L50 75 Z" fill="#ecf0f1" stroke="#34495e" stroke-width="3"/>
+  
+  <!-- Communication symbol (speech bubble) -->
+  <path d="M35 60 Q40 65, 45 65 L55 65 Q60 65, 62 62 L65 55 L65 45 Q65 40, 60 40 L40 40 Q35 40, 35 45 Z" 
+        fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+  
+  <!-- Small dot representing a specific point/concern -->
+  <circle cx="50" cy="35" r="3" fill="#e74c3c"/>
+  
+  <!-- Subtle texture -->
+  <rect x="10" y="10" width="80" height="80" rx="15" ry="15" 
+        fill="url(#texture)" opacity="0.1"/>
+  
+  <!-- Texture definition -->
+  <defs>
+    <pattern id="texture" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+      <path d="M0 0 L10 10 M10 0 L0 10" stroke="#ffffff" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+  </defs>
+</svg>
