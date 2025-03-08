@@ -1,0 +1,14 @@
+<svg width="250" height="50" viewBox="0 0 250 50" xmlns="http://www.w3.org/2000/svg">
+  <!-- Microphone Icon -->
+  <g transform="translate(10,5)">
+    <rect x="10" y="3" width="10" height="25" rx="5" fill="#4F46E5"/>
+    <circle cx="15" cy="5" r="5" fill="#4F46E5"/>
+    <line x1="15" y1="30" x2="15" y2="40" stroke="#4F46E5" stroke-width="3"/>
+    <line x1="10" y1="40" x2="20" y2="40" stroke="#4F46E5" stroke-width="3"/>
+  </g>
+  
+  <!-- Website Name -->
+  <text x="50" y="35" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#4F46E5">
+    Jann Ki Awaz
+  </text>
+</svg>

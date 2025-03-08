@@ -1,8 +1,14 @@
 import React from 'react'
+import Hero from '../components/Hero'
+import Footer from '../components/Footer'
+import Notification from '../components/Notification'
 
 const Home = () => {
   return (
-    <div>Home
+    <div>
+      <Hero />
+      <Footer/>
+      <Notification/>
         
     </div>
   )
