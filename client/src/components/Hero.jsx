@@ -1,21 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronRight, Users, Vote, LineChart } from 'lucide-react';
-import { useClerk, useUser } from '@clerk/clerk-react';
+import { useClerk, useUser, useAuth } from '@clerk/clerk-react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { assets } from '../assets/assets';
-
 
 const Hero = () => {
   const { openSignIn } = useClerk();
   const { user } = useUser();
-    const navigate = useNavigate();
+  const { getToken } = useAuth();
+  const navigate = useNavigate();
+  const [stats, setStats] = useState({
+    totalUsers: 0,
+    totalProposals: 0,
+    successRate: 0
+  });
+  const [loading, setLoading] = useState(true);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+  useEffect(() => {
+    fetchHeroStats();
+  }, []);
+
+  const fetchHeroStats = async () => {
+    try {
+      setLoading(true);
+      
+      const response = await axios.get(`${backendUrl}/api/user/hero-stats`);
+      
+      if (response.data.success) {
+        setStats(response.data.data);
+      }
+    } catch (error) {
+      console.error('Error fetching hero stats:', error);
+      // Keep default values on error
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="relative bg-gradient-to-br from-indigo-900 via-indigo-800 to-indigo-900 overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
-          backgroundImage:  `url(${assets.com})`,
+          backgroundImage: `url(${assets.com})`,
         }} />
       </div>
 
@@ -40,41 +69,47 @@ const Hero = () => {
                   <ChevronRight className="ml-2" size={20} />
                 </button>
               )}
-              <a
-                
-                className="inline-flex items-center px-6 py-3 rounded-lg border-2 border-white text-white font-semibold hover:bg-white hover:text-indigo-600 transition-colors" onClick={()=>navigate('/user-dashboard')}
+              <button
+                className="inline-flex items-center px-6 py-3 rounded-lg border-2 border-white text-white font-semibold hover:bg-white hover:text-indigo-600 transition-colors" 
+                onClick={() => navigate('/user-dashboard')}
               >
                 View Projects
-              </a>
+              </button>
             </div>
 
-            {/* Stats */}
+            {/* ✅ UPDATED: Real Stats */}
             <div className="mt-12 grid grid-cols-3 gap-4 lg:gap-8">
               <div className="text-center">
                 <div className="flex justify-center mb-2">
                   <Users className="text-indigo-300" size={24} />
                 </div>
-                <div className="text-2xl font-bold text-white">10K+</div>
+                <div className="text-2xl font-bold text-white">
+                  {loading ? '...' : `${stats.totalUsers.toLocaleString()}+`}
+                </div>
                 <div className="text-indigo-200 text-sm">Active Citizens</div>
               </div>
               <div className="text-center">
                 <div className="flex justify-center mb-2">
                   <Vote className="text-indigo-300" size={24} />
                 </div>
-                <div className="text-2xl font-bold text-white">500+</div>
+                <div className="text-2xl font-bold text-white">
+                  {loading ? '...' : `${stats.totalProposals.toLocaleString()}+`}
+                </div>
                 <div className="text-indigo-200 text-sm">Projects Proposed</div>
               </div>
-              <div className="text-center">
+              {/* <div className="text-center">
                 <div className="flex justify-center mb-2">
                   <LineChart className="text-indigo-300" size={24} />
                 </div>
-                <div className="text-2xl font-bold text-white">85%</div>
+                <div className="text-2xl font-bold text-white">
+                  {loading ? '...' : `${stats.successRate}%`}
+                </div>
                 <div className="text-indigo-200 text-sm">Success Rate</div>
-              </div>
+              </div> */}
             </div>
           </div>
 
-          {/* Right column - Image/Illustration */}
+          {/* ✅ UPDATED: Right column - Removed dummy overlay cards */}
           <div className="relative">
             <div className="relative rounded-lg overflow-hidden shadow-2xl">
               <img
@@ -82,17 +117,6 @@ const Hero = () => {
                 alt="Community Development"
                 className="w-full h-full object-cover"
               />
-              {/* Overlay Cards */}
-              <div className="absolute bottom-4 left-4 right-4 flex justify-between">
-                <div className="bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-lg">
-                  <div className="text-sm font-semibold text-indigo-600">Latest Project</div>
-                  <div className="text-xs text-gray-600">Community Park Renovation</div>
-                </div>
-                <div className="bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-lg">
-                  <div className="text-sm font-semibold text-green-600">95% Supported</div>
-                  <div className="text-xs text-gray-600">by local residents</div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.22.11",
+    "@heroicons/react": "^2.2.0",
     "@tailwindcss/vite": "^4.0.3",
     "axios": "^1.7.9",
     "framer-motion": "^12.4.0",
@@ -20,13 +21,16 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",
+    "react-leaflet": "^4.2.1",
     "react-router-dom": "^7.1.5",
     "react-toastify": "^11.0.3",
+    "socket.io-client": "^4.8.1",
     "tailwind-scrollbar-hide": "^2.0.0",
     "tailwindcss": "^4.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@shadcn/ui": "^0.0.4",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
